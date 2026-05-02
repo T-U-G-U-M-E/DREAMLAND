@@ -73,6 +73,44 @@ document.addEventListener('DOMContentLoaded', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
+
+  // Mobile side navigation functionality
+  const burgerMenu = document.querySelector('.burger-menu');
+  const sideNav = document.querySelector('.side-nav');
+  const closeMenu = document.querySelector('.close-menu');
+  const overlay = document.querySelector('.overlay');
+
+  function openSideNav() {
+    sideNav.classList.add('active');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSideNav() {
+    sideNav.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (burgerMenu) {
+    burgerMenu.addEventListener('click', openSideNav);
+  }
+
+  if (closeMenu) {
+    closeMenu.addEventListener('click', closeSideNav);
+  }
+
+  if (overlay) {
+    overlay.addEventListener('click', closeSideNav);
+  }
+
+  // Close side navigation when clicking on navigation links (optional)
+  const sideNavLinks = sideNav.querySelectorAll('.nav-item a');
+  sideNavLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      closeSideNav();
+    });
+  });
 });
 
 // Listen for window resize to update device detection
